@@ -1,10 +1,14 @@
 // let products = JSON.parse(localStorage.getItem("products")) || products;
 // console.log(myProducts);
-let noProducts = document.querySelector(".no-products");
 let productDom = document.querySelector('.products');
-function drawProductsUI(products = []) {
+let noProductsDom = document.querySelector(".no-products");
+
+let drawProductsUI;
+(drawProductsUI = function (products = []) {
     let myProducts = products.filter(item => item.isMe === "Y");
+
     if (myProducts.length != 0) {
+        console.log(myProducts);
         let productsUI = myProducts.map(item => {
             return `
                 <div class="product-item" style="border:${item.isMe === 'Y' ? "2px solid green" : ""}">
@@ -19,16 +23,18 @@ function drawProductsUI(products = []) {
                 
             </div>
         `
-        }).join(' ');
+        });
 
-        productDom.innerHTML = productsUI;
+        productDom.innerHTML = productsUI.join("");
     } else {
-        noProducts.innerHTML = "No Products !!";
+        //    console.log("no");
+        productDom.innerHTML = "";
+        noProductsDom.innerHTML = "No Products !!";
     }
 
-}
+})(JSON.parse(localStorage.getItem("products")) || productsDB);
 
-drawProductsUI(JSON.parse(localStorage.getItem("products")) || productsDB);
+// drawProductsUI(JSON.parse(localStorage.getItem("products")) || productsDB);
 
 function editProduct(id) {
     localStorage.setItem("editProduct", id);
@@ -37,12 +43,13 @@ function editProduct(id) {
 function deleteProduct(id) {
     let products = JSON.parse(localStorage.getItem('products')) || productsDB;
     let myProducts = products.filter(item => item.isMe === "Y");
-    let filtered = myProducts.filter(item => item.id !== id);
+    let filtered = myProducts.filter(i => i.id !== id);
     // console.log(filtered);
 
     let clicked = myProducts.find((i) => i.id === id)
     products = products.filter(item => item.id !== clicked.id);
     // console.log(products);
     localStorage.setItem('products', JSON.stringify(products));
+
     drawProductsUI(filtered);
 }
