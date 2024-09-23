@@ -6,24 +6,26 @@ let cartsProductsMenu = document.querySelector('.carts-products');
 let cartsProductsDivDom = document.querySelector('.carts-products div');
 let shoppingCartIcon = document.querySelector('.shoppingCart');
 let badgeDom = document.querySelector('.badge');
-let products = JSON.parse(localStorage.getItem("products"));
+let products = productsDB;
+
 // JSON.parse();
 
 shoppingCartIcon.addEventListener('click', openCartMenu);
 function drawProductsUI(products = []) {
     let productsUI = products.map(item => {
-        console.log('eee',item);
+        console.log('eee', item);
         return `
-            <div class="product-item">
+            <div class="product-item" style="border:${item.isMe === 'Y'?"2px solid green":""}">
             <img src="${item.imageUrl}" alt="placeholer for product" class="product-item-img">
             <div class="product-item-desc">
                 <a onclick="saveItemData(${item.id})">${item.title}</a>
                 <p>${item.desc}</p>
                 <span>Size: ${item.size}</span> 
+                ${item.isMe === 'Y'? "<button class='edit-products' onclick='editProduct("+item.id+")'>Edit Product</button>":""}
             </div>
             <div class="product-item-actions">
                 <button class="add-to-cart" id="addCart" onclick="addedToCart(${item.id})">Add to Cart</button>
-                <i class="far fa-heart favorite" style="color:${item.liked==true?'red':""}" onclick="addedToFavorite(${item.id})"></i>
+                <i class="far fa-heart favorite" style="color:${item.liked == true ? 'red' : ""}" onclick="addedToFavorite(${item.id})"></i>
             </div>
         </div>
     `
@@ -32,7 +34,7 @@ function drawProductsUI(products = []) {
     productDom.innerHTML = productsUI;
 }
 
-drawProductsUI(JSON.parse(localStorage.getItem("products")));
+drawProductsUI(JSON.parse(localStorage.getItem("products")) || products);
 
 let addedItem = localStorage.getItem("productsInCart") ? JSON.parse(localStorage.getItem("productsInCart")) : [];
 
@@ -44,26 +46,35 @@ if (addedItem) {
     badgeDom.innerHTML = addedItem.length;
 }
 
-let allItems = [];
+// let allItems = [];
 function addedToCart(id) {
     if (localStorage.getItem('username')) {
-        let choosenItem = products.find((item) => item.id === id);
-        let item = allItems.find(i => i.id === choosenItem.id)
+        let products = JSON.parse(localStorage.getItem("products")) || products;
+        let product = products.find((item) => item.id === id);
+        let isProductInCart = addedItem.some((i) => i.id === product.id)
         //cartsProductsDivDom.innerHTML += `<p>${choosenItem.title}</p>`;
 
-        if (item) {
-            choosenItem.qty += 1;
+        if (isProductInCart) {
+            addedItem = addedItem.map(p => {
+                if (p.id === product.id) {
+                    p.qty += 1;
+                }
+                return p;
+
+            });
+
         } else {
-            allItems.push(choosenItem);
+            addedItem.push(product);
         }
         cartsProductsDivDom.innerHTML = "";
-        allItems.forEach(item => {
+        addedItem.forEach(item => {
             cartsProductsDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
-        })
+        });
 
-        addedItem = [...addedItem, choosenItem];
-        let uniqueProducts = getUniqueArray(addedItem, "id");
-        localStorage.setItem("productsInCart", JSON.stringify(uniqueProducts));
+        // addedItem = [...addedItem, product];
+        // let uniqueProducts = getUniqueArray(addedItem, "id");
+        localStorage.setItem("productsInCart", JSON.stringify(addedItem));
+
         let cartItemsLength = document.querySelectorAll(".carts-products div p");
         badgeDom.style.display = "block";
         badgeDom.innerHTML = cartItemsLength.length;
@@ -85,8 +96,8 @@ function getUniqueArray(arr, filterType) {
     let unique = arr
         .map(item => item[filterType])
         .map((item, i, final) => final.indexOf(item) === i && i)
-        .filter(item=>arr[item])
-        .map(item=>arr[item]);
+        .filter(item => arr[item])
+        .map(item => arr[item]);
     return unique;
 }
 function openCartMenu() {
@@ -102,6 +113,7 @@ function openCartMenu() {
 
 function saveItemData(id) {
     localStorage.setItem("productId", id);
+    // console.log(id);
     window.location = "productDetails.html";
 }
 
@@ -123,9 +135,9 @@ function search(title, myArray) {
 
 }
 
-let favoritesItems = localStorage.getItem("productsFavorite") 
-? JSON.parse(localStorage.getItem("productsFavorite")) 
-: [];
+let favoritesItems = localStorage.getItem("productsFavorite")
+    ? JSON.parse(localStorage.getItem("productsFavorite"))
+    : [];
 function addedToFavorite(id) {
     if (localStorage.getItem('username')) {
         let choosenItem = products.find((item) => item.id === id);
@@ -133,15 +145,34 @@ function addedToFavorite(id) {
         favoritesItems = [...favoritesItems, choosenItem];
         let uniqueProducts = getUniqueArray(favoritesItems, "id");
         localStorage.setItem("productsFavorite", JSON.stringify(uniqueProducts));
-       products.map(item=>{
-        if(item.id===choosenItem.id){
-            item.liked = true;
-        }
-       })
-       localStorage.setItem('products',JSON.stringify(products));
+        products.map(item => {
+            if (item.id === choosenItem.id) {
+                item.liked = true;
+            }
+        })
+        localStorage.setItem('products', JSON.stringify(products));
 
         drawProductsUI(products)
     } else {
         window.location = 'login.html'
     }
+}
+//filter by size
+let sizeFilter = document.getElementById("size-filter")
+sizeFilter.addEventListener('change', getProductsFilteredBySize)
+function getProductsFilteredBySize(e) {
+    let val = e.target.value;
+    let products = JSON.parse(localStorage.getItem("products")) || products;
+
+    if(val==='all'){
+        drawProductsUI(products)
+    }else{
+        products = products.filter(item => item.size===val);
+        drawProductsUI(products);
+    }
+}
+// edit product
+function editProduct(id){
+    localStorage.setItem("editProduct",id);
+    window.location = "editProduct.html";
 }

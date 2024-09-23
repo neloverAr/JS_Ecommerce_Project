@@ -37,9 +37,8 @@ function removeItemFromFavorite(id) {
     let productsFavorite= localStorage.getItem('productsFavorite')
     if (productsFavorite) {
         let items = JSON.parse(productsInCart);
-
         let filteredItems = items.filter(item => item.id !== id);
         localStorage.setItem('productsFavorite', JSON.stringify(filteredItems));
-         drawCartProductsUI(filteredItems);
+        drawFavoritesUI(filteredItems);
     }
 } 

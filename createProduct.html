@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <title>Shopping Cart | Home Page</title>
+    <title>Shopping Cart | Create product Page</title>
+    <link rel="stylesheet" href="css/createProduct.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -47,30 +48,27 @@
             </div>
         </div>
     </header>
-    <section class="home">
-        <div class="container">
-            <input id="search" class="search" type="text" placeholder="Search by name">
-            <div class="products">
-            
-            </div>
-            <div class="products-filter">
-             <h2>Filter by size</h2>   
-             <select name="" class="size-filter" id="size-filter">
-                    <option value="" hidden>Filter by size</option>
-                    <option value="all" >All</option>
-                    <option value="small" >Small</option>
-                    <option value="medium" >Medium</option>
-                    <option value="large" >Large</option>
-                </select>
-            </div>
-        </div>
-        <a href="createProduct.html" class="create-product-icon">
-            <li class="fa fa-plus"></li>
-        </a>
+    <section class="create-product-page">
+       <div class="container">
+        <form action="" id="create-form">
+            <input type="file" id="upload-image-file">
+            <input type="text" placeholder="Name..." id="product-name">
+            <input type="text" placeholder="Desc..." id="product-desc">
+            <select name="" id="product-size">
+                <option value="" hidden>Select Size</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+
+            <input type="submit" value="Create" id="product-create-btn">
+        </form>
+       </div>
     </section>
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/createProduct.js"></script>
+  
 </body>
 
 </html>

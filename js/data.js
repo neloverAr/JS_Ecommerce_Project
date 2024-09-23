@@ -6,6 +6,7 @@ let productsDB = [
         imageUrl: 'images/placeholder.jpg',
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias adipisci sunt ipsa, cumque facere nesciunt.',
         qty:1,
+        isMe:"N",
     },
     {
         id: 2,
@@ -14,6 +15,7 @@ let productsDB = [
         imageUrl: 'images/placeholder.jpg',
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias adipisci sunt ipsa, cumque facere nesciunt.',
         qty:1,
+        isMe:"N",
     },
     {
         id: 3,
@@ -22,6 +24,7 @@ let productsDB = [
         imageUrl: 'images/placeholder.jpg',
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias adipisci sunt ipsa, cumque facere nesciunt.',
         qty:1,
+        isMe:"N",
     },
     {
         id: 4,
@@ -30,7 +33,8 @@ let productsDB = [
         imageUrl: 'images/placeholder.jpg',
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias adipisci sunt ipsa, cumque facere nesciunt.',
         qty:1,
+        isMe:"N",
     },
 ];
 
-localStorage.setItem("products",JSON.stringify(productsDB));
+// localStorage.setItem("products",JSON.stringify(productsDB));
