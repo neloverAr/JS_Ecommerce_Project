@@ -2,10 +2,12 @@
 let username = document.querySelector("#username");
 let email = document.querySelector("#email");
 let password = document.querySelector("#password");
-let register_btn = document.querySelector("#sign_up");
+let registerBtn = document.querySelector("#sign_up");
 
 
-register_btn.addEventListener('click', function (e) {
+registerBtn.addEventListener('click', register);
+
+function register(e) {
     e.preventDefault();
     if (username.value === "" || email.value === "" || password.value === "") {
         alert("Fill required Fields");
@@ -16,9 +18,9 @@ register_btn.addEventListener('click', function (e) {
 
 
         setTimeout(() => {
-            window.location = "index.html";
+            window.location = "login.html";
         }
             , 1500)
 
     }
-})
+}
