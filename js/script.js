@@ -2,18 +2,17 @@
 // define products
 
 let productDom = document.querySelector('.products');
-let cartsProductsMenu = document.querySelector('.carts-products');
-let cartsProductsDivDom = document.querySelector('.carts-products div');
-let shoppingCartIcon = document.querySelector('.shoppingCart');
-let badgeDom = document.querySelector('.badge');
+// let cartsProductsMenu = document.querySelector('.carts-products');
+// let cartsProductsDivDom = document.querySelector('.carts-products div');
+// let shoppingCartIcon = document.querySelector('.shoppingCart');
+// let badgeDom = document.querySelector('.badge');
 let products = productsDB;
 
 // JSON.parse();
 
-shoppingCartIcon.addEventListener('click', openCartMenu);
+// shoppingCartIcon.addEventListener('click', openCartMenu);
 function drawProductsUI(products = []) {
     let productsUI = products.map(item => {
-        console.log('eee', item);
         return `
             <div class="product-item" style="border:${item.isMe === 'Y'?"2px solid green":""}">
             <img src="${item.imageUrl}" alt="placeholer for product" class="product-item-img">
@@ -36,15 +35,15 @@ function drawProductsUI(products = []) {
 
 drawProductsUI(JSON.parse(localStorage.getItem("products")) || products);
 
-let addedItem = localStorage.getItem("productsInCart") ? JSON.parse(localStorage.getItem("productsInCart")) : [];
+// let addedItem = localStorage.getItem("productsInCart") ? JSON.parse(localStorage.getItem("productsInCart")) : [];
 
-if (addedItem) {
-    addedItem.map(item => {
-        cartsProductsDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
-    });
-    badgeDom.style.display = "block";
-    badgeDom.innerHTML = addedItem.length;
-}
+// if (addedItem) {
+//     addedItem.map(item => {
+//         cartsProductsDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
+//     });
+//     badgeDom.style.display = "block";
+//     badgeDom.innerHTML = addedItem.length;
+// }
 
 // let allItems = [];
 function addedToCart(id) {
@@ -68,7 +67,7 @@ function addedToCart(id) {
         }
         cartsProductsDivDom.innerHTML = "";
         addedItem.forEach(item => {
-            cartsProductsDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
+            cartsProductsDivDom.innerHTML += `<p>${item.title} <span class='item-qty'>${item.qty}</span></p>`;
         });
 
         // addedItem = [...addedItem, product];
@@ -100,16 +99,16 @@ function getUniqueArray(arr, filterType) {
         .map(item => arr[item]);
     return unique;
 }
-function openCartMenu() {
-    if (cartsProductsDivDom.innerHTML != "") {
-        if (cartsProductsMenu.style.display == "block") {
-            cartsProductsMenu.style.display = "none";
-        } else {
-            cartsProductsMenu.style.display = "block";
-        }
+// function openCartMenu() {
+//     if (cartsProductsDivDom.innerHTML != "") {
+//         if (cartsProductsMenu.style.display == "block") {
+//             cartsProductsMenu.style.display = "none";
+//         } else {
+//             cartsProductsMenu.style.display = "block";
+//         }
 
-    }
-}
+//     }
+// }
 
 function saveItemData(id) {
     localStorage.setItem("productId", id);
@@ -176,3 +175,4 @@ function editProduct(id){
     localStorage.setItem("editProduct",id);
     window.location = "editProduct.html";
 }
+

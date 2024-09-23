@@ -7,20 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <title>Shopping Cart | Create product Page</title>
-    <link rel="stylesheet" href="css/createProduct.css">
+    <title>Shopping Cart | Profile Page</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
 </head>
 
 <body>
-
-    <!--
-     <i class="fas fa-shopping-cart"></i> 
-     <i class="far fa-heart"></i>
-     
-     -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -35,8 +27,9 @@
                         <li id="ar_lang">Ar</li>
                         <li><a href="profile.html" id="user"></a></li>
                         <li><a href="favorites.html" id=" ">favorites</a></li>
+                        <li><a href="myProducts.html">My Products</a></li>
                         <li class="shoppingCart">
-                            <i class="fas fa-shopping-cart"></i> 
+                            <i class="fas fa-shopping-cart"></i>
                             <span class="badge"></span>
                             <div class="carts-products">
                                 <div></div>
@@ -46,30 +39,27 @@
                         <li><a href="#" id="logout">Log out</a></li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </header>
-    <section class="create-product-page">
-       <div class="container">
-        <form action="" id="create-form">
-            <input type="file" id="upload-image-file">
-            <input type="text" placeholder="Name..." id="product-name">
-            <input type="text" placeholder="Desc..." id="product-desc">
-            <select name="" id="product-size">
-                <option value="" hidden>Select Size</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-            </select>
 
-            <input type="submit" value="Create" id="product-create-btn">
-        </form>
-       </div>
-    </section>
+    <section class="profile-page">
+        <div class="container">
+            <img src="images/avatar.png" class="user-avatar" alt="">
+        <h2 id="username"> </h2>
+        <p id="email"> </p>
+        <p id="products-length" class="products-length">Products Length: <span> </span></p>
+         <a href="editProfile.html">Edit Profile</a>
+        
+        <a href="createProduct.html" class="create-product-icon">
+            <li class="fa fa-plus"></li>
+        </a>
+        </div>
+    </section> 
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/createProduct.js"></script>
+    <script src="js/cartMenu.js"></script>
+    <script src="js/profile.js"></script>
     <script src="js/langDir.js"></script>
 </body>
 

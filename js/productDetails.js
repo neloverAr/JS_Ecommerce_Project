@@ -9,4 +9,11 @@ itemDom.innerHTML = `
      <p>${productsDetails.desc}</p>
      <span>Size: ${productsDetails.size}</span><br>
      <span>Quantity: ${productsDetails.qty}</span>
+     <button class='edit-products' onclick='editProduct(${productsDetails.id})'>Edit Product</button>
+               
 `;
+
+function editProduct(id){
+     localStorage.setItem("editProduct",id);
+     window.location = "editProduct.html";
+ }

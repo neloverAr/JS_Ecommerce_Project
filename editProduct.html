@@ -31,8 +31,11 @@
                         <li><a href="register.html">Sign Up</a></li>
                     </ul>
                     <ul id="user_info">
-                        <li><a href="#" id="user"></a></li>
+                        <li id="en_lang">En</li>
+                        <li id="ar_lang">Ar</li>
+                        <li><a href="profile.html" id="user"></a></li>
                         <li><a href="favorites.html" id=" ">favorites</a></li>
+                        <li><a href="myProducts.html">My Products</a></li>
                         <li class="shoppingCart">
                             <i class="fas fa-shopping-cart"></i> 
                             <span class="badge"></span>
@@ -50,7 +53,7 @@
     </header>
     <section class="create-product-page">
        <div class="container">
-        <form action="" id="create-form">
+        <form action="" id="update-form">
             <input type="file" id="upload-image-file">
             <input type="text" placeholder="Name..." id="product-name">
             <input type="text" placeholder="Desc..." id="product-desc">
@@ -61,12 +64,16 @@
                 <option value="large">Large</option>
             </select>
 
-            <input type="submit" value="Create" id="product-create-btn">
+            <input type="submit" value="Update" id="product-update-btn">
         </form>
        </div>
+       <a href="createProduct.html" class="create-product-icon">
+        <li class="fa fa-plus"></li>
+    </a>
     </section>
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/cartMenu.js"></script>
     <script src="js/editProduct.js"></script>
   
 </body>

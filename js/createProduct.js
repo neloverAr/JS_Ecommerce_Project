@@ -6,7 +6,6 @@ let inputFile= document.getElementById("upload-image-file");
 let productSizeValue;
 let productImage;
 
-
 productSizeSelect.addEventListener('change',getProductSizeValue);
 createForm.addEventListener('submit',createProductFun);
 inputFile.addEventListener('change',uploadImage)
@@ -21,9 +20,9 @@ function createProductFun(e){
     let nameValue = productName.value;
     let descValue = productDesc.value;
 
-   if(nameValue&&descValue){
+   if(nameValue && descValue){
     let obj = {
-        id:allProducts ? allProducts.lenght + 1 : 1,
+        id: allProducts ? allProducts.length + 1 : 1,
         qty:1,
         imageUrl:productImage,
         title:nameValue,
